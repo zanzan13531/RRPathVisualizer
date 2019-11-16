@@ -61,18 +61,16 @@ class App : Application() {
 
         root.children.addAll(canvas, startRect, endRect, robotRect)
 
-        stage.title = "PathVisualizer"
+        stage.title = "Team 12611 PathVisualizer"
         stage.isResizable = false
 
-        println("duration $duration")
+        println("duration ${"%.2f".format(duration)}")
 
         stage.show()
         t1.play()
     }
 
     fun run(gc: GraphicsContext) {
-        if (startTime.isNaN())
-            startTime = Clock.seconds
 
         GraphicsUtil.gc = gc
         gc.drawImage(fieldImage, 0.0, 0.0)
@@ -84,6 +82,10 @@ class App : Application() {
         TrajectoryGen.drawOffbounds()
         gc.globalAlpha = 1.0
 
+        if(startTime.isNaN()) {
+            Thread.sleep(3000)
+        }
+
         val trajectory = trajectories[activeTrajectoryIndex]
 
         val prevDurations: Double = {
@@ -92,6 +94,10 @@ class App : Application() {
                 x += trajectoryDurations[i]
             x
         }()
+
+        if (startTime.isNaN()) {
+            startTime = Clock.seconds
+        }
 
         val time = Clock.seconds
         val profileTime = time - startTime - prevDurations
@@ -117,7 +123,9 @@ class App : Application() {
         GraphicsUtil.updateRobotRect(robotRect, current, GraphicsUtil.ROBOT_COLOR, 0.75)
         GraphicsUtil.drawRobotVector(current)
 
-        stage.title = "Profile duration : ${"%.2f".format(duration)} - time in profile ${"%.2f".format(profileTime)}"
+        stage.title = "Technova Profile duration : ${"%.2f".format(duration)} - time in profile ${"%.2f".format(profileTime)}"
+
+
     }
 }
 

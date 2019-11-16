@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle
 
 
 object GraphicsUtil {
-    val DEFUALT_RESOLUTION = 2.0 // inches
+    val DEFUALT_RESOLUTION = 1.0 // inches
 
     val FIELD_WIDTH = 144.0 // 12'
 
@@ -17,8 +17,8 @@ object GraphicsUtil {
     val LINE_THICKNESS = 3.0
 
     val PATH_COLOR = Color.YELLOW
-    val ROBOT_COLOR = Color.MAROON
-    val ROBOT_VECTOR_COLOR = Color.BLUE
+    val ROBOT_COLOR = Color.BLUE
+    val ROBOT_VECTOR_COLOR = Color.MAROON
     val END_BOX_COLOR = Color.GREEN
 
     lateinit var gc: GraphicsContext

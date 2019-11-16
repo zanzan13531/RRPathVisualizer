@@ -71,7 +71,7 @@ object TrajectoryGen {
     }
 
     fun drawOffbounds() {
-        GraphicsUtil.fillRect(Vector2d(0.0, -63.0), 18.0, 18.0) // robot against the wall
+        GraphicsUtil.fillRect(Vector2d(-12.0, -63.0), 18.0, 18.0) // robot against the wall
     }
 }
 
