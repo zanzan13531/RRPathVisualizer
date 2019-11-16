@@ -8,13 +8,45 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 
 object TrajectoryGen {
-    private val constraints = DriveConstraints(45.0, 60.0, 0.0, 270.0.toRadians, 270.0.toRadians, 0.0)
-    private val startPose = Pose2d(-48.0, -24.0, 170.0.toRadians)
+    private val constraints = DriveConstraints(36.0, 30.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val startPose = Pose2d(-33.0, -63.0, 180.0.toRadians)
 
     fun createTrajectory(): ArrayList<Trajectory> {
         val list = ArrayList<Trajectory>()
 
-        val builder1 = TrajectoryBuilder(Pose2d(), constraints)
+        val builder1 = TrajectoryBuilder(startPose, constraints)
+
+        builder1.splineTo(Pose2d(-59.0,-36.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(50.0,-36.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-39.0, 180.0.toRadians))
+            .splineTo(Pose2d(-35.0,-36.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(50.0,-36.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-39.0, 180.0.toRadians))
+            .splineTo(Pose2d(-18.0,-36.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(52.0,-35.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-39.0, 180.0.toRadians))
+            .splineTo(Pose2d(-27.0,-35.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(52.0,-33.0, 180.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(55.0,-31.0, 90.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(35.0,-56.0, 0.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(48.0,-56.0, 0.0.toRadians))
+            .reverse()
+            .splineTo(Pose2d(0.0,-41.0, 0.0.toRadians))
+
 
         // dump routine
         /*builder
