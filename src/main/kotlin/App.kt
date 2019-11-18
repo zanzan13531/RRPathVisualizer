@@ -79,7 +79,8 @@ class App : Application() {
 
         gc.globalAlpha = 0.5
         GraphicsUtil.setColor(Color.RED)
-        TrajectoryGen.drawOffbounds()
+        TrajectoryGen.drawOffbounds1()
+        TrajectoryGen.drawOffbounds2()
         gc.globalAlpha = 1.0
 
         if(startTime.isNaN()) {

@@ -20,6 +20,7 @@ object GraphicsUtil {
     val ROBOT_COLOR = Color.BLUE
     val ROBOT_VECTOR_COLOR = Color.MAROON
     val END_BOX_COLOR = Color.GREEN
+    val STONE_COLOR = Color.ORANGE
 
     lateinit var gc: GraphicsContext
 
@@ -65,10 +66,14 @@ object GraphicsUtil {
         gc.globalAlpha = 0.75
     }
 
-    fun fillRect(center: Vector2d, w: Double, h: Double) {
+    fun fillRect(center: Vector2d, w: Double, h: Double, s:Boolean) {
         val center_pix = center.toPixel
         val pix_w = w * pixelsPerInch
         val pix_h = h * pixelsPerInch
+
+        if(s) {
+            setColor(STONE_COLOR)
+        }
 
         gc.fillRect(center_pix.x - pix_w / 2.0, center_pix.y - pix_h / 2.0, pix_w, pix_h)
     }
