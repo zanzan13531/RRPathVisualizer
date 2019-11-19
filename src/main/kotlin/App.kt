@@ -21,11 +21,11 @@ class App : Application() {
     val endRect = Rectangle(100.0, 100.0, 10.0, 10.0)
 
     var startTime = Double.NaN
-    val trajectories = TrajectoryGen.createTrajectory()
+    var isBlueAlliance = true
+    val trajectories = TrajectoryGenBlue.createTrajectory()
 
     lateinit var fieldImage: Image
     lateinit var stage: Stage
-
 
     var activeTrajectoryIndex = 0
     val trajectoryDurations = trajectories.map { it.duration() }
@@ -79,8 +79,13 @@ class App : Application() {
 
         gc.globalAlpha = 0.5
         GraphicsUtil.setColor(Color.RED)
-        TrajectoryGen.drawOffbounds1()
-        TrajectoryGen.drawOffbounds2()
+        if(isBlueAlliance) {
+            TrajectoryGenBlue.drawOffbounds1()
+            TrajectoryGenBlue.drawOffbounds2()
+        } else {
+            TrajectoryGen.drawOffbounds1()
+            TrajectoryGen.drawOffbounds2()
+        }
         gc.globalAlpha = 1.0
 
         if(startTime.isNaN()) {
