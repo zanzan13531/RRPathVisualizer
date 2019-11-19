@@ -1,3 +1,4 @@
+import com.acmerobotics.roadrunner.geometry.Pose2d
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.application.Application
@@ -124,7 +125,7 @@ class App : Application() {
         trajectories.forEach{GraphicsUtil.drawSampledPath(it.path)}
 
         GraphicsUtil.updateRobotRect(startRect, start, GraphicsUtil.END_BOX_COLOR, 0.5)
-        GraphicsUtil.updateRobotRect(endRect, end, GraphicsUtil.END_BOX_COLOR, 0.5)
+        GraphicsUtil.updateRobotRect(endRect, Pose2d(0.0,41.0, 0.0.toRadians), GraphicsUtil.END_BOX_COLOR, 0.5)
 
         GraphicsUtil.updateRobotRect(robotRect, current, GraphicsUtil.ROBOT_COLOR, 0.75)
         GraphicsUtil.drawRobotVector(current)

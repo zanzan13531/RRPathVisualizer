@@ -5,7 +5,7 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 
 object TrajectoryGenBlue {
-    private val constraints = DriveConstraints(42.0, 25.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val constraints = DriveConstraints(48.0, 30.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
 
 
     fun createTrajectory(): ArrayList<Trajectory> {
