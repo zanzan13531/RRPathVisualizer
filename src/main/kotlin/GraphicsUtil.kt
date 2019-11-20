@@ -20,7 +20,7 @@ object GraphicsUtil {
     val ROBOT_COLOR = Color.BLUE
     val ROBOT_VECTOR_COLOR = Color.MAROON
     val END_BOX_COLOR = Color.GREEN
-    val STONE_COLOR = Color.ORANGE
+    val STONE_COLOR = Color.YELLOW
 
     lateinit var gc: GraphicsContext
 
