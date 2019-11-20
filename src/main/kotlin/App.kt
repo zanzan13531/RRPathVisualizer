@@ -17,21 +17,24 @@ import javafx.stage.Stage
 import javafx.util.Duration
 
 class App : Application() {
+
+    val isBlueAlliance = false
+
     val robotRect = Rectangle(100.0, 100.0, 10.0, 10.0)
     val startRect = Rectangle(100.0, 100.0, 10.0, 10.0)
     val endRect = Rectangle(100.0, 100.0, 10.0, 10.0)
 
     var startTime = Double.NaN
-    var isBlueAlliance = true
-    val trajectories = TrajectoryGenBlue.createTrajectory()
+
+    var trajectories = if(isBlueAlliance) TrajectoryGenBlue.createTrajectory() else TrajectoryGen.createTrajectory()
 
     lateinit var fieldImage: Image
     lateinit var stage: Stage
 
     var activeTrajectoryIndex = 0
     val trajectoryDurations = trajectories.map { it.duration() }
-    val duration = trajectoryDurations.sum()
-    val numberOfTrajectories = trajectories.size
+    var duration = trajectoryDurations.sum()
+    var numberOfTrajectories = trajectories.size
 
     companion object {
         var WIDTH = 0.0
@@ -65,7 +68,9 @@ class App : Application() {
         stage.title = "Team 12611 PathVisualizer"
         stage.isResizable = false
 
-        println("duration ${"%.2f".format(duration)}")
+        trajectoryDurations.forEachIndexed { index,element -> println(" $index duration: $element") }
+
+        println("total duration ${"%.2f".format(duration)}")
 
         stage.show()
         t1.play()
