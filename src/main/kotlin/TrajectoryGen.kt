@@ -9,7 +9,7 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 
 object TrajectoryGen {
-    private val constraints = DriveConstraints(45.0, 36.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val constraints = DriveConstraints(45.0, 40.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
 
 
     fun createTrajectory(): ArrayList<Trajectory> {
@@ -34,8 +34,8 @@ object TrajectoryGen {
             .reverse()
             .lineTo(Vector2d(0.0,-41.0))
 //            .splineTo(Pose2d(0.0, -41.0, 180.0.toRadians))
-            .splineTo(Pose2d(38.0,-35.0, 180.0.toRadians))
-            .lineTo(Vector2d(47.0,-35.0))
+            .splineTo(Pose2d(42.0,-35.0, 180.0.toRadians))
+            .lineTo(Vector2d(55.0,-35.0))
 
         // 2.
         //list.add(builder1.build())
@@ -53,7 +53,8 @@ object TrajectoryGen {
         builder1 = TrajectoryBuilder(Pose2d(-35.0, -36.0, 180.0.toRadians), constraints)
         builder1.reverse()
             .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
-            .splineTo(Pose2d(47.0,-35.0, 180.0.toRadians))
+            .splineTo(Pose2d(42.0,-35.0, 180.0.toRadians))
+            .lineTo(Vector2d(55.0,-35.0))
 
         // 4.
         //list.add(builder1.build())
@@ -71,7 +72,8 @@ object TrajectoryGen {
         builder1.reverse()
             .strafeTo(Vector2d(-18.0,-41.0))
             .lineTo(Vector2d(0.0,-41.0))
-            .splineTo(Pose2d(51.0,-35.0, 180.0.toRadians))
+            .splineTo(Pose2d(42.0,-35.0, 180.0.toRadians))
+            .lineTo(Vector2d(51.0,-35.0))
 
         // 6.
         //list.add(builder1.build())
@@ -89,7 +91,8 @@ object TrajectoryGen {
         builder1
             .reverse()
             .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
-            .splineTo(Pose2d(51.0,-34.0, 180.0.toRadians))
+            .splineTo(Pose2d(40.0,-35.0, 180.0.toRadians))
+            .lineTo(Vector2d(51.0,-35.0))
 
         // 8.
         //list.add(builder1.build())
