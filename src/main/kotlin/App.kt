@@ -68,9 +68,15 @@ class App : Application() {
         stage.title = "Team 12611 PathVisualizer"
         stage.isResizable = false
 
-        trajectoryDurations.forEachIndexed { index,element -> println(" $index duration: $element") }
+        trajectoryDurations.forEachIndexed { index,element -> println(" $index duration: ${"%.3f".format(element)}") }
 
-        println("total duration ${"%.2f".format(duration)}")
+        println("total duration ${"%.3f".format(duration)}")
+
+        trajectories.forEach{
+            if(it.markers.isNotEmpty()) {
+                it.markers[0].callback()
+            }
+        }
 
         stage.show()
         t1.play()
@@ -91,12 +97,9 @@ class App : Application() {
         } else {
             TrajectoryGen.drawOffbounds1()
             TrajectoryGen.drawOffbounds2()
+            //TrajectoryGen.drawOffbounds3()
         }
         gc.globalAlpha = 1.0
-
-        if(startTime.isNaN()) {
-            Thread.sleep(3000)
-        }
 
         val trajectory = trajectories[activeTrajectoryIndex]
 
@@ -127,7 +130,9 @@ class App : Application() {
             }
         }
 
-        trajectories.forEach{GraphicsUtil.drawSampledPath(it.path)}
+        trajectories.forEach{
+            GraphicsUtil.drawSampledPath(it.path)
+        }
 
         GraphicsUtil.updateRobotRect(startRect, start, GraphicsUtil.END_BOX_COLOR, 0.5)
         GraphicsUtil.updateRobotRect(endRect, Pose2d(0.0,41.0, 0.0.toRadians), GraphicsUtil.END_BOX_COLOR, 0.5)
