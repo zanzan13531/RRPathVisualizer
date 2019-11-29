@@ -9,7 +9,7 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 
 object TrajectoryGen {
-    private val constraints = DriveConstraints(52.0, 60.0, 0.0, 360.0.toRadians, 360.0.toRadians, 0.0)
+    private val constraints = DriveConstraints(45.0, 40.0, 0.0, 360.0.toRadians, 360.0.toRadians, 0.0)
 
 
     fun createTrajectory(): ArrayList<Trajectory> {
@@ -110,21 +110,21 @@ object TrajectoryGen {
             .splineTo(Pose2d(0.0,-42.0, 180.0.toRadians))
             .splineTo(Pose2d(51.0,-35.0, 180.0.toRadians))
 
-        list.add(builder1.build())
-
-        builder1 = TrajectoryBuilder(Pose2d(51.0, -36.0, 180.0.toRadians), constraints)
-        builder1
-            .splineTo(Pose2d(0.0,-42.0, 180.0.toRadians))
-            .splineTo(Pose2d(-43.0,-36.0, 180.0.toRadians))
-        // 8.
-        list.add(builder1.build())
-
-        builder1 = TrajectoryBuilder(Pose2d(-43.0, -36.0, 180.0.toRadians), constraints)
-        builder1
-            .reverse()
-            .splineTo(Pose2d(0.0,-42.0, 180.0.toRadians))
-            .splineTo(Pose2d(51.0,-35.0, 180.0.toRadians))
-            .splineTo(Pose2d(55.0,-40.0, 90.0.toRadians))
+//        list.add(builder1.build())
+//
+//        builder1 = TrajectoryBuilder(Pose2d(51.0, -36.0, 180.0.toRadians), constraints)
+//        builder1
+//            .splineTo(Pose2d(0.0,-42.0, 180.0.toRadians))
+//            .splineTo(Pose2d(-43.0,-36.0, 180.0.toRadians))
+//        // 8.
+//        list.add(builder1.build())
+//
+//        builder1 = TrajectoryBuilder(Pose2d(-43.0, -36.0, 180.0.toRadians), constraints)
+//        builder1
+//            .reverse()
+//            .splineTo(Pose2d(0.0,-42.0, 180.0.toRadians))
+//            .splineTo(Pose2d(51.0,-35.0, 180.0.toRadians))
+            .splineTo(Pose2d(55.0,-40.0, 90.0.toRadians), SplineInterpolator(180.0.toRadians, 90.0.toRadians))
             .reverse()
             .lineTo(Vector2d(55.0, -31.0))
             .lineTo(Vector2d(55.0, -28.0))
