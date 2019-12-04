@@ -72,9 +72,9 @@ class App : Application() {
 
         println("total duration ${"%.3f".format(duration)}")
 
-        trajectories.forEach{
-            if(it.markers.isNotEmpty()) {
-                it.markers[0].callback()
+        for(tr in trajectories) {
+            for(m in tr.markers) {
+                m.callback()
             }
         }
 
