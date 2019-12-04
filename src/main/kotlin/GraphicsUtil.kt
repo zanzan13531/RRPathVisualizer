@@ -78,6 +78,18 @@ object GraphicsUtil {
         gc.fillRect(center_pix.x - pix_w / 2.0, center_pix.y - pix_h / 2.0, pix_w, pix_h)
     }
 
+    fun fillFoundationRect(center: Vector2d, w: Double, h: Double) {
+        val center_pix = center.toPixel
+        val pix_w = w * pixelsPerInch
+        val pix_h = h * pixelsPerInch
+
+        setColor(Color.RED)
+
+
+        gc.fillRect(center_pix.x - pix_w / 2.0, center_pix.y - pix_h / 2.0, pix_w, pix_h)
+    }
+
+
     fun updateRobotRect(rectangle: Rectangle, pose2d: Pose2d, color: Color, opacity: Double) {
         val pix_w = ROBOT_WIDTH * pixelsPerInch
 

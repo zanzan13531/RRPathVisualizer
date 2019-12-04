@@ -35,6 +35,8 @@ class App : Application() {
     val trajectoryDurations = trajectories.map { it.duration() }
     var duration = trajectoryDurations.sum()
     var numberOfTrajectories = trajectories.size
+    var markerCalled = false
+    var nextMarker = -1
 
     companion object {
         var WIDTH = 0.0
@@ -68,13 +70,13 @@ class App : Application() {
         stage.title = "Team 12611 PathVisualizer"
         stage.isResizable = false
 
-        trajectoryDurations.forEachIndexed { index,element -> println(" $index duration: ${"%.3f".format(element)}") }
+        trajectoryDurations.forEachIndexed { index,element -> println(" ${index+1} duration: ${"%.3f".format(element)}") }
 
         println("total duration ${"%.3f".format(duration)}")
 
         for(tr in trajectories) {
             for(m in tr.markers) {
-                m.callback()
+                //m.callback()
             }
         }
 
@@ -128,6 +130,17 @@ class App : Application() {
                 activeTrajectoryIndex = 0
                 startTime = time
             }
+            markerCalled = false
+        }
+
+        if(trajectory.markers.isNotEmpty()) {
+            nextMarker = 0
+            if(trajectory.markers[nextMarker].time > profileTime && nextMarker >-1) {
+                trajectory.markers[nextMarker].callback()
+                if(nextMarker+1 > trajectory.markers.size)
+                nextMarker =
+            }
+
         }
 
         trajectories.forEach{
@@ -135,7 +148,7 @@ class App : Application() {
         }
 
         GraphicsUtil.updateRobotRect(startRect, start, GraphicsUtil.END_BOX_COLOR, 0.5)
-        GraphicsUtil.updateRobotRect(endRect, Pose2d(5.0,-41.0, 0.0.toRadians), GraphicsUtil.END_BOX_COLOR, 0.5)
+        GraphicsUtil.updateRobotRect(endRect, Pose2d(5.0,-41.0, 0.0.toRadians), GraphicsUtil.ROBOT_VECTOR_COLOR, 0.2)
 
         GraphicsUtil.updateRobotRect(robotRect, current, GraphicsUtil.ROBOT_COLOR, 0.75)
         GraphicsUtil.drawRobotVector(current)
