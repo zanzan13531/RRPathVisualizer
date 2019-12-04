@@ -9,8 +9,8 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 
 object TrajectoryGen {
-    private val constraints = DriveConstraints(40.0, 40.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
-    private val max_constraints = DriveConstraints(45.0, 45.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val constraints = DriveConstraints(52.0, 60.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val max_constraints = DriveConstraints(52.0, 60.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
 
 
     fun createTrajectory(): ArrayList<Trajectory> {
@@ -24,7 +24,7 @@ object TrajectoryGen {
     }
 
     fun drawOffbounds1() {
-        GraphicsUtil.fillRect(Vector2d(12.0, -63.0), 18.0, 18.0, false) // robot against the wall
+        GraphicsUtil.fillRect(Vector2d(0.0, -63.0), 18.0, 18.0, false) // robot against the wall
     }
 
     fun drawOffbounds2() {
@@ -99,7 +99,7 @@ object TrajectoryGen {
         builder1 = TrajectoryBuilder(Pose2d(49.0, -35.0, 180.0.toRadians), constraints)
 
         builder1
-            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(0.0,-38.0, 180.0.toRadians))
             .splineTo(Pose2d(-35.0,-36.0, 180.0.toRadians))
 
         // 3.
@@ -115,17 +115,36 @@ object TrajectoryGen {
 
         builder1 = TrajectoryBuilder(Pose2d(55.0, -35.0, 180.0.toRadians), constraints)
         builder1
-            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(0.0,-38.0, 180.0.toRadians))
             .lineTo(Vector2d(-18.0,-41.0))
             .strafeTo(Vector2d(-18.0,-36.0))
+
         // 5.
         list.add(builder1.build())
 
         builder1 = TrajectoryBuilder(Pose2d(-18.0, -36.0, 180.0.toRadians), constraints)
         builder1.reverse()
             .strafeTo(Vector2d(-18.0,-42.0))
+            .lineTo(Vector2d(0.0,-42.0))
+            .splineTo(Pose2d(61.0,-35.0, 180.0.toRadians))
 
-        val myPose = Pose2d(61.0, -35.0, Math.PI)
+        list.add(builder1.build())
+
+        builder1 = TrajectoryBuilder(Pose2d(61.0, -35.0, 180.0.toRadians), constraints)
+        builder1
+            .splineTo(Pose2d(0.0,-38.0, 180.0.toRadians))
+            .lineTo(Vector2d(-43.0,-41.0))
+            .strafeTo(Vector2d(-43.0,-36.0))
+        list.add(builder1.build())
+
+        builder1 = TrajectoryBuilder(Pose2d(-43.0, -36.0, 180.0.toRadians), constraints)
+        builder1.reverse()
+            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .splineTo(Pose2d(55.0,-36.0, 180.0.toRadians))
+
+        list.add(builder1.build())
+
+        val myPose = Pose2d(55.0, -35.0, Math.PI)
         var builder0 = TrajectoryBuilder(myPose, max_constraints)
         builder0.splineTo(Pose2d(0.0, -40.0, Math.PI))
             .lineTo(Vector2d(-27.0,-40.0))

@@ -116,13 +116,13 @@ class App : Application() {
 
         val time = Clock.seconds
         val profileTime = time - startTime - prevDurations
-        val duration = trajectoryDurations[activeTrajectoryIndex]
+        val profile_duration = trajectoryDurations[activeTrajectoryIndex]
 
         val start = trajectories.first().start()
         val end = trajectories.last().end()
         val current = trajectory[profileTime]
 
-        if (profileTime >= duration) {
+        if (profileTime >= profile_duration) {
             activeTrajectoryIndex++
             if(activeTrajectoryIndex >= numberOfTrajectories) {
                 activeTrajectoryIndex = 0
@@ -135,14 +135,12 @@ class App : Application() {
         }
 
         GraphicsUtil.updateRobotRect(startRect, start, GraphicsUtil.END_BOX_COLOR, 0.5)
-        GraphicsUtil.updateRobotRect(endRect, Pose2d(0.0,41.0, 0.0.toRadians), GraphicsUtil.END_BOX_COLOR, 0.5)
+        GraphicsUtil.updateRobotRect(endRect, Pose2d(5.0,-41.0, 0.0.toRadians), GraphicsUtil.END_BOX_COLOR, 0.5)
 
         GraphicsUtil.updateRobotRect(robotRect, current, GraphicsUtil.ROBOT_COLOR, 0.75)
         GraphicsUtil.drawRobotVector(current)
 
-        stage.title = "Technova Profile duration : ${"%.2f".format(duration)} - time in profile ${"%.2f".format(profileTime)}"
-
-
+        stage.title = "Technova Profile duration : ${"%.2f".format(profile_duration)} - time in profile ${"%.2f".format(profileTime)} - total ${"%.2f".format(duration)}"
     }
 }
 
