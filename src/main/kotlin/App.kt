@@ -35,7 +35,7 @@ class App : Application() {
     val trajectoryDurations = trajectories.map { it.duration() }
     var duration = trajectoryDurations.sum()
     var numberOfTrajectories = trajectories.size
-    var markerCalled = false
+    var firstTime = true
     var nextMarker = -1
 
     companion object {
@@ -74,12 +74,6 @@ class App : Application() {
 
         println("total duration ${"%.3f".format(duration)}")
 
-        for(tr in trajectories) {
-            for(m in tr.markers) {
-                //m.callback()
-            }
-        }
-
         stage.show()
         t1.play()
     }
@@ -105,6 +99,13 @@ class App : Application() {
 
         val trajectory = trajectories[activeTrajectoryIndex]
 
+        if(firstTime) {
+            firstTime = false
+            if(trajectory.markers.isNotEmpty()) {
+                nextMarker = 0;
+            }
+        }
+
         val prevDurations: Double = {
             var x = 0.0
             for (i in 0 until activeTrajectoryIndex)
@@ -124,24 +125,31 @@ class App : Application() {
         val end = trajectories.last().end()
         val current = trajectory[profileTime]
 
+        if(trajectory.markers.isNotEmpty()) {
+
+            if(nextMarker >-1 && trajectory.markers[nextMarker].time <= profileTime) {
+                println("maker time: ${"%.3f".format(trajectory.markers[nextMarker].time)} | profileTime:${"%.3f".format(profileTime)}")
+                trajectory.markers[nextMarker].callback()
+                if(nextMarker+1 >= trajectory.markers.size) {
+                    nextMarker = -1
+                } else {
+                    nextMarker++
+                }
+            }
+
+        }
+
         if (profileTime >= profile_duration) {
             activeTrajectoryIndex++
             if(activeTrajectoryIndex >= numberOfTrajectories) {
                 activeTrajectoryIndex = 0
                 startTime = time
             }
-            markerCalled = false
-        }
-
-        if(trajectory.markers.isNotEmpty()) {
-            nextMarker = 0
-            if(trajectory.markers[nextMarker].time > profileTime && nextMarker >-1) {
-                trajectory.markers[nextMarker].callback()
-                if(nextMarker+1 > trajectory.markers.size)
-                nextMarker =
+            if(trajectories[activeTrajectoryIndex].markers.isNotEmpty()) {
+                nextMarker = 0
             }
-
         }
+
 
         trajectories.forEach{
             GraphicsUtil.drawSampledPath(it.path)
@@ -153,7 +161,7 @@ class App : Application() {
         GraphicsUtil.updateRobotRect(robotRect, current, GraphicsUtil.ROBOT_COLOR, 0.75)
         GraphicsUtil.drawRobotVector(current)
 
-        stage.title = "Technova Profile duration : ${"%.2f".format(profile_duration)} - time in profile ${"%.2f".format(profileTime)} - total ${"%.2f".format(duration)}"
+        stage.title = "Technova Profile duration : ${"%.3f".format(profile_duration)} - time in profile ${"%.3f".format(profileTime)} - total ${"%.3f".format(duration)}"
     }
 }
 

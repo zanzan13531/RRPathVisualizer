@@ -82,6 +82,7 @@ object TrajectoryGen {
  //           .strafeTo( Vector2d(-33.0, -36.0))
  //           .lineTo(Vector2d(-59.0,-36.0))
             .strafeTo( Vector2d(-59.0, -36.0))
+ //           .addMarker(Vector2d(-50.0, -40.0), {println("spatial marker triggered ...") })
             .addMarker { println("grab stone 1") }
             //builder1.splineTo(Pose2d(-59.0,-36.0, 180.0.toRadians))
 
