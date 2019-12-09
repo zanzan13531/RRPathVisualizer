@@ -9,8 +9,8 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 
 object TrajectoryGen {
-    private val constraints = DriveConstraints(48.0, 50.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
-    private val max_constraints = DriveConstraints(48.0, 50.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val constraints = DriveConstraints(40.0, 40.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
+    private val max_constraints = DriveConstraints(50.0, 50.0, 0.0, 180.0.toRadians, 180.0.toRadians, 0.0)
 
 
     fun createTrajectory(): ArrayList<Trajectory> {
@@ -21,55 +21,6 @@ object TrajectoryGen {
         // return buildStrafeTrajectory()
 
         // return buildFoundatonTrajectory()
-    }
-
-    fun drawOffbounds1() {
-        GraphicsUtil.fillRect(Vector2d(0.0, -63.0), 18.0, 18.0, false) // robot against the wall
-    }
-
-    fun drawOffbounds2() {
-        GraphicsUtil.fillRect(Vector2d(0.0, -24.0), 12.0, 8.0,true) // block against the bridge
-        GraphicsUtil.fillFoundationRect(Vector2d(60.0, -45.0), 34.5, 18.5)
-    }
-
-    fun buildFoundatonTrajectory(): ArrayList<Trajectory> {
-        val list = ArrayList<Trajectory>()
-        val myPose = Pose2d(15.0, -63.0, Math.PI/2)
-        var builder0 = TrajectoryBuilder(myPose, constraints)
-        builder0.splineTo(Pose2d(53.0, -31.0, Math.PI/2))
-            .reverse()
-            .splineTo( Pose2d(35.0, -56.0, 0.0))
-            .splineTo( Pose2d(5.0, -40.0, 0.0))
-        list.add(builder0.build())
-
-        return list
-    }
-
-    fun buildFoundaton2Trajectory(): ArrayList<Trajectory> {
-        val list = ArrayList<Trajectory>()
-        val myPose = Pose2d(61.0, -36.0, Math.PI)
-        var builder0 = TrajectoryBuilder(myPose, max_constraints)
-        builder0.splineTo(Pose2d(0.0, -40.0, Math.PI))
-            .lineTo(Vector2d(-27.0,-40.0))
-            .strafeTo(Vector2d(-27.0,-36.0))
-            .reverse()
-            .splineTo(Pose2d(0.0, -42.0, Math.PI))
-            .splineTo(Pose2d(51.0, -45.0, Math.PI/2))
-            .addMarker (4.0, { println("test marker 0....")})
-            .addMarker (Vector2d(49.0,36.0), { println("test marker spatial....")})
-
-        list.add(builder0.build())
-
-        builder0 = TrajectoryBuilder(Pose2d(53.0, -31.0, Math.PI/2), constraints)
-        builder0
-            .reverse()
-            .splineTo( Pose2d(35.0, -58.0, 0.0))
-            .splineTo( Pose2d(5.0, -40.0, 0.0))
-
-            //.lineTo( Vector2d(5.0, -40.0))
-        list.add(builder0.build())
-
-        return list
     }
 
     fun buildSplineTrajectory(): ArrayList<Trajectory> {
@@ -127,7 +78,7 @@ object TrajectoryGen {
 //        builder1 = TrajectoryBuilder(Pose2d(55.0, -35.0, 180.0.toRadians), constraints)
         builder1
             .reverse()
-            .splineTo(Pose2d(0.0,-38.0, 180.0.toRadians))
+            .splineTo(Pose2d(0.0,-39.0, 180.0.toRadians))
             .lineTo(Vector2d(-18.0,-41.0))
             .strafeTo(Vector2d(-18.0,-36.0))
             .addMarker { println("grab stone 3") }
@@ -148,44 +99,51 @@ object TrajectoryGen {
  //       builder1 = TrajectoryBuilder(Pose2d(61.0, -35.0, 180.0.toRadians), constraints)
         builder1.reverse()
             .splineTo(Pose2d(0.0,-38.0, 180.0.toRadians))
-            .lineTo(Vector2d(-43.0,-41.0))
-            .strafeTo(Vector2d(-43.0,-35.0))
+            .lineTo(Vector2d(-27.0,-41.0))
+            .strafeTo(Vector2d(-27.0,-35.0))
             .addMarker { println("grab stone 4") }
 
         // 7. get 4th stone
         list.add(builder1.build())
 
-        builder1 = TrajectoryBuilder(Pose2d(-43.0, -35.0, 180.0.toRadians), constraints)
+        builder1 = TrajectoryBuilder(Pose2d(-27.0, -35.0, 180.0.toRadians), constraints)
         builder1.reverse()
-            .strafeTo(Vector2d(-43.0,-42.0))
+            .strafeTo(Vector2d(-27.0,-42.0))
             .lineTo(Vector2d(0.0,-42.0))
+            .splineTo(Pose2d(53.0, -45.0, Math.PI/2))
+            .addMarker (Vector2d(47.0, -36.0), {println("release stone 4 ...")})
+            .reverse()
+            .addMarker {println("release foundation lock ...")}
+            .forward(6.0)
+            .addMarker {println("lock foundation")}
+
             //.splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
-            .splineTo(Pose2d(55.0,-35.0, 180.0.toRadians))
-            .addMarker { println("release stone 4") }
+            //.splineTo(Pose2d(61.0,-35.0, 180.0.toRadians))
+            //.addMarker { println("release stone 4") }
 
         // 8. place 4th stone
         list.add(builder1.build())
 
-        var myPose = Pose2d(55.0, -35.0, Math.PI)
+//        var myPose = Pose2d(55.0, -35.0, Math.PI)
+//        var builder0 = TrajectoryBuilder(myPose, max_constraints)
+//        builder0
+//                .splineTo(Pose2d(0.0, -40.0, Math.PI))
+//            .lineTo(Vector2d(-27.0,-40.0))
+//                .addMarker {println("lower arm  stone 5...")}
+//            .strafeTo(Vector2d(-27.0,-36.0))
+//                .addMarker {println("grab  stone 5...")}
+//            .reverse()
+//            .splineTo(Pose2d(0.0, -42.0, Math.PI))
+//            .splineTo(Pose2d(51.0, -45.0, Math.PI/2))
+//            .addMarker (Vector2d(47.0, -36.0), {println("release stone 5...")})
+//            .reverse()
+//            .lineTo(Vector2d(51.0, -31.0))
+//            .addMarker { println("lock foundation ...")}
+
+//        list.add(builder0.build())
+
+        var myPose = Pose2d(53.0, -31.0, Math.PI/2)
         var builder0 = TrajectoryBuilder(myPose, max_constraints)
-        builder0
-                .splineTo(Pose2d(0.0, -40.0, Math.PI))
-            .lineTo(Vector2d(-27.0,-40.0))
-                .addMarker {println("lower arm  stone 5...")}
-            .strafeTo(Vector2d(-27.0,-36.0))
-                .addMarker {println("grab  stone 5...")}
-            .reverse()
-            .splineTo(Pose2d(0.0, -42.0, Math.PI))
-            .splineTo(Pose2d(51.0, -45.0, Math.PI/2))
-            .addMarker (Vector2d(47.0, -36.0), {println("release stone 5...")})
-            .reverse()
-            .lineTo(Vector2d(51.0, -31.0))
-            .addMarker { println("lock foundation ...")}
-
-        list.add(builder0.build())
-
-        myPose = Pose2d(51.0, -31.0, Math.PI/2)
-        builder0 = TrajectoryBuilder(myPose, max_constraints)
 
         builder0.reverse()
             .splineTo( Pose2d(35.0, -58.0, 0.0))
@@ -194,6 +152,56 @@ object TrajectoryGen {
 //            .addMarker (Vector2d(49.0,36.0), { println("test marker spatial....")})
 
         // 9. get and place 5th stone and move foundation and park
+        list.add(builder0.build())
+
+        return list
+    }
+
+
+    fun drawOffbounds1() {
+        GraphicsUtil.fillRect(Vector2d(0.0, -63.0), 18.0, 18.0, false) // robot against the wall
+    }
+
+    fun drawOffbounds2() {
+        GraphicsUtil.fillRect(Vector2d(0.0, -24.0), 12.0, 8.0,true) // block against the bridge
+        GraphicsUtil.fillFoundationRect(Vector2d(60.0, -45.0), 34.5, 18.5)
+    }
+
+    fun buildFoundatonTrajectory(): ArrayList<Trajectory> {
+        val list = ArrayList<Trajectory>()
+        val myPose = Pose2d(15.0, -63.0, Math.PI/2)
+        var builder0 = TrajectoryBuilder(myPose, constraints)
+        builder0.splineTo(Pose2d(53.0, -31.0, Math.PI/2))
+            .reverse()
+            .splineTo( Pose2d(35.0, -56.0, 0.0))
+            .splineTo( Pose2d(5.0, -40.0, 0.0))
+        list.add(builder0.build())
+
+        return list
+    }
+
+    fun buildFoundaton2Trajectory(): ArrayList<Trajectory> {
+        val list = ArrayList<Trajectory>()
+        val myPose = Pose2d(61.0, -36.0, Math.PI)
+        var builder0 = TrajectoryBuilder(myPose, max_constraints)
+        builder0.splineTo(Pose2d(0.0, -40.0, Math.PI))
+            .lineTo(Vector2d(-27.0,-40.0))
+            .strafeTo(Vector2d(-27.0,-36.0))
+            .reverse()
+            .splineTo(Pose2d(0.0, -42.0, Math.PI))
+            .splineTo(Pose2d(51.0, -45.0, Math.PI/2))
+            .addMarker (4.0, { println("test marker 0....")})
+            .addMarker (Vector2d(49.0,36.0), { println("test marker spatial....")})
+
+        list.add(builder0.build())
+
+        builder0 = TrajectoryBuilder(Pose2d(53.0, -31.0, Math.PI/2), constraints)
+        builder0
+            .reverse()
+            .splineTo( Pose2d(35.0, -58.0, 0.0))
+            .splineTo( Pose2d(5.0, -40.0, 0.0))
+
+        //.lineTo( Vector2d(5.0, -40.0))
         list.add(builder0.build())
 
         return list
