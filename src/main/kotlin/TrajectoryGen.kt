@@ -79,10 +79,10 @@ object TrajectoryGen {
         var builder1 = TrajectoryBuilder(startPose, constraints)
 
         builder1
- //           .strafeTo( Vector2d(-33.0, -36.0))
- //           .lineTo(Vector2d(-59.0,-36.0))
+//            .strafeTo( Vector2d(-33.0, -39.0))
+//            .lineTo(Vector2d(-59.0,-36.0))
             .strafeTo( Vector2d(-59.0, -36.0))
- //           .addMarker(Vector2d(-50.0, -40.0), {println("spatial marker triggered ...") })
+            .addMarker(Vector2d(-50.0, -40.0), {println("spatial marker triggered ...") })
             .addMarker { println("grab stone 1") }
             //builder1.splineTo(Pose2d(-59.0,-36.0, 180.0.toRadians))
 
@@ -93,7 +93,9 @@ object TrajectoryGen {
 
         builder1
             .reverse()
-            .splineTo(Pose2d(0.0, -41.0, 180.0.toRadians))
+            .strafeTo(Vector2d(-59.0,-42.0))
+            .lineTo(Vector2d(0.0,-42.0))
+            //.splineTo(Pose2d(0.0, -41.0, 180.0.toRadians))
             .splineTo(Pose2d(49.0,-35.0, 180.0.toRadians))
             .addMarker { println("release stone 1") }
 
@@ -113,7 +115,9 @@ object TrajectoryGen {
 
         builder1 = TrajectoryBuilder(Pose2d(-35.0, -36.0, 180.0.toRadians), constraints)
         builder1.reverse()
-            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .strafeTo(Vector2d(-35.0,-42.0))
+            .lineTo(Vector2d(0.0,-42.0))
+            //.splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
             .splineTo(Pose2d(55.0,-35.0, 180.0.toRadians))
             .addMarker { println("release stone 2") }
 
@@ -153,36 +157,39 @@ object TrajectoryGen {
 
         builder1 = TrajectoryBuilder(Pose2d(-43.0, -35.0, 180.0.toRadians), constraints)
         builder1.reverse()
-            .splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
+            .strafeTo(Vector2d(-43.0,-42.0))
+            .lineTo(Vector2d(0.0,-42.0))
+            //.splineTo(Pose2d(0.0,-41.0, 180.0.toRadians))
             .splineTo(Pose2d(55.0,-35.0, 180.0.toRadians))
             .addMarker { println("release stone 4") }
 
         // 8. place 4th stone
-        //list.add(builder1.build())
+        list.add(builder1.build())
 
-        //var myPose = Pose2d(55.0, -35.0, Math.PI)
-        //var builder0 = TrajectoryBuilder(myPose, max_constraints)
-        //builder0
-            builder1.reverse()
+        var myPose = Pose2d(55.0, -35.0, Math.PI)
+        var builder0 = TrajectoryBuilder(myPose, max_constraints)
+        builder0
                 .splineTo(Pose2d(0.0, -40.0, Math.PI))
             .lineTo(Vector2d(-27.0,-40.0))
+                .addMarker {println("lower arm  stone 5...")}
             .strafeTo(Vector2d(-27.0,-36.0))
+                .addMarker {println("grab  stone 5...")}
             .reverse()
             .splineTo(Pose2d(0.0, -42.0, Math.PI))
             .splineTo(Pose2d(51.0, -45.0, Math.PI/2))
- //           .addMarker (4.0, { println("release stone ...")})
+            .addMarker (Vector2d(47.0, -36.0), {println("release stone 5...")})
             .reverse()
             .lineTo(Vector2d(51.0, -31.0))
-            .addMarker ({ println("lock foundation ...")})
+            .addMarker { println("lock foundation ...")}
 
-        list.add(builder1.build())
+        list.add(builder0.build())
 
-        var myPose = Pose2d(51.0, -31.0, Math.PI/2)
-        var builder0 = TrajectoryBuilder(myPose, max_constraints)
+        myPose = Pose2d(51.0, -31.0, Math.PI/2)
+        builder0 = TrajectoryBuilder(myPose, max_constraints)
 
         builder0.reverse()
             .splineTo( Pose2d(35.0, -58.0, 0.0))
-            .addMarker ({ println("release foundation ...")})
+            .addMarker { println("release foundation ...")}
             .splineTo( Pose2d(5.0, -40.0, 0.0))
 //            .addMarker (Vector2d(49.0,36.0), { println("test marker spatial....")})
 
