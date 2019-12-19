@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle
 import javafx.stage.Stage
 import javafx.util.Duration
 
+
 class App : Application() {
 
     val isBlueAlliance = false
@@ -45,7 +46,13 @@ class App : Application() {
 
     override fun start(stage: Stage?) {
         this.stage = stage!!
-        fieldImage = Image("/field.png")
+        fieldImage = Image("field.png")
+
+//        val imageView = ImageView(fieldImage)
+//        imageView.setPreserveRatio(false)
+//        imageView.setFitWidth(750.0)
+//        imageView.setFitHeight(750.0)
+//        fieldImage = imageView.snapshot(null, null)
 
         val root = Group()
 

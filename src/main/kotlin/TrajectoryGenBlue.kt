@@ -16,21 +16,22 @@ object TrajectoryGenBlue {
 //        val startPose = Pose2d(-18.0, -35.0, 180.0.toRadians)
         var builder1 = TrajectoryBuilder(startPose, constraints)
 
-        builder1.strafeRight(27.0)
-            .back(26.0)
+        builder1.reverse()
+            .strafeTo(Vector2d(-59.0, 36.0))
 
         // 1.
         list.add(builder1.build())
 
         builder1 = TrajectoryBuilder(Pose2d(-59.0, 36.0, 0.0.toRadians), constraints)
         builder1
-                .splineTo(Pose2d(0.0,41.0, 0.0.toRadians))
-            .splineTo(Pose2d(47.0,36.0, 0.0.toRadians))
+            .strafeTo(Vector2d(-59.0, 42.0))
+            .splineTo(Pose2d(0.0,42.0, 0.0.toRadians))
+            .splineTo(Pose2d(49.0,36.0, 0.0.toRadians))
 
         // 2.
         list.add(builder1.build())
 
-        builder1 = TrajectoryBuilder(Pose2d(47.0, 36.0, 0.0.toRadians), constraints)
+        builder1 = TrajectoryBuilder(Pose2d(49.0, 36.0, 0.0.toRadians), constraints)
         builder1.reverse()
             .splineTo(Pose2d(0.0,39.0, 0.0.toRadians))
             .splineTo(Pose2d(-35.0,36.0, 0.0.toRadians))
@@ -40,8 +41,9 @@ object TrajectoryGenBlue {
 
         builder1 = TrajectoryBuilder(Pose2d(-35.0, 36.0, 0.0.toRadians), constraints)
         builder1
-            .splineTo(Pose2d(0.0,41.0, 0.0.toRadians))
-            .splineTo(Pose2d(47.0,36.0, 0.0.toRadians))
+            .strafeTo(Vector2d(-35.0,42.0))
+            .splineTo(Pose2d(0.0,42.0, 0.0.toRadians))
+            .splineTo(Pose2d(56.0,36.0, 0.0.toRadians))
 
         // 4.
         list.add(builder1.build())
@@ -60,12 +62,12 @@ object TrajectoryGenBlue {
         builder1
             .strafeTo(Vector2d(-18.0,42.0))
             .lineTo(Vector2d(0.0,42.0))
-            .splineTo(Pose2d(51.0,35.0, 0.0.toRadians))
+            .splineTo(Pose2d(61.0,35.0, 0.0.toRadians))
 
         // 6.
         list.add(builder1.build())
 
-        builder1 = TrajectoryBuilder(Pose2d(51.0, 36.0, 0.0.toRadians), constraints)
+        builder1 = TrajectoryBuilder(Pose2d(61.0, 36.0, 0.0.toRadians), constraints)
         builder1
             .reverse()
             .splineTo(Pose2d(0.0,39.0, 0.0.toRadians))
@@ -76,8 +78,11 @@ object TrajectoryGenBlue {
 
         builder1 = TrajectoryBuilder(Pose2d(-27.0, 36.0, 0.0.toRadians), constraints)
         builder1
-            .splineTo(Pose2d(0.0,41.0, 0.0.toRadians))
-            .splineTo(Pose2d(51.0,35.0, 0.0.toRadians))
+            .strafeTo(Vector2d(-27.0,41.0))
+            .splineTo(Pose2d(0.0,42.0, 0.0.toRadians))
+            .splineTo(Pose2d(51.0,34.0, 0.0.toRadians))
+            .strafeLeft(5.0)
+
 
         // 8.
         list.add(builder1.build())
@@ -112,9 +117,9 @@ object TrajectoryGenBlue {
 //
 //        list.add(builder1.build())
 
-        builder1 = TrajectoryBuilder(Pose2d(51.0, 33.0, 0.0.toRadians), constraints)
-        builder1
-            .strafeLeft(3.0)
+//        builder1 = TrajectoryBuilder(Pose2d(51.0, 32.0, 270.0.toRadians), constraints)
+//        builder1
+//            .forward(5.0)
 
 //            .splineTo(Pose2d(55.0,-31.0, 90.0.toRadians))
 //            .reverse()
@@ -132,14 +137,14 @@ object TrajectoryGenBlue {
 
 
         // 9.
-       list.add(builder1.build())
+//       list.add(builder1.build())
 
         val builder2 = TrajectoryBuilder(Pose2d(51.0,31.0, (-90.0).toRadians), constraints)
 
             builder2
             .forward(5.0)
             .reverse()
-            .splineTo(Pose2d(40.0,48.0, 0.0.toRadians))
+            .splineTo(Pose2d(33.0,58.0, 0.0.toRadians))
             .reverse()
                 .lineTo(Vector2d(0.0, 41.0))
  //           .splineTo(Pose2d(48.0,56.0, 0.0.toRadians))

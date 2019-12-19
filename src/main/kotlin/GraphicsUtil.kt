@@ -17,9 +17,9 @@ object GraphicsUtil {
     val LINE_THICKNESS = 3.0
 
     val PATH_COLOR = Color.YELLOW
-    val ROBOT_COLOR = Color.BLUE
-    val ROBOT_VECTOR_COLOR = Color.MAROON
-    val END_BOX_COLOR = Color.GREEN
+    val ROBOT_COLOR = Color.PALEVIOLETRED
+    val ROBOT_VECTOR_COLOR = Color.BLACK
+    val END_BOX_COLOR = Color.DARKOLIVEGREEN
     val STONE_COLOR = Color.YELLOW
 
     lateinit var gc: GraphicsContext
@@ -54,7 +54,7 @@ object GraphicsUtil {
     }
 
     fun drawRobotVector(pose2d: Pose2d) {
-        gc.globalAlpha = 0.75
+        gc.globalAlpha = 0.95
 
         val point1 = pose2d.vec()
         val v = pose2d.headingVec() * ROBOT_WIDTH / 2.0
