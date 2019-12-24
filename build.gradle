@@ -27,5 +27,5 @@ compileTestKotlin {
 }
 
 application {
-    mainClassName = 'AppKt'
+    mainClassName = 'Appkt'
 }
